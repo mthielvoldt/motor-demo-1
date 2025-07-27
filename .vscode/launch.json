@@ -1,0 +1,24 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+
+    {
+      "name": "Cortex Debug",
+      "request": "launch",
+      "type": "cortex-debug",
+      "servertype": "openocd",
+      "interface": "swd",
+      "device": "STM32G431CBU",
+      "cwd": "${workspaceFolder}/build",
+      "executable": "MCSDK-project1.elf",
+      "showDevDebugOutput": "raw",
+      "configFiles": [
+        "interface/stlink.cfg",
+        "target/stm32g4x.cfg",
+      ]
+    }
+  ]
+}
