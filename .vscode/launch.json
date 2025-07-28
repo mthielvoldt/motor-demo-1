@@ -6,13 +6,29 @@
   "configurations": [
 
     {
-      "name": "Cortex Debug",
+      "name": "LinuxHost",
       "request": "launch",
       "type": "cortex-debug",
       "servertype": "openocd",
       "interface": "swd",
       "device": "STM32G431CBU",
       "cwd": "${workspaceFolder}/build",
+      "executable": "MCSDK-project1.elf",
+      "showDevDebugOutput": "raw",
+      "configFiles": [
+        "interface/stlink.cfg",
+        "target/stm32g4x.cfg",
+      ]
+    },
+    {
+      "name": "WinHost",
+      "request": "launch",
+      "type": "cortex-debug",
+      "servertype": "openocd",
+      "serverpath": "C:/Users/rileyt/PathBins/openocd-v0.12.0-i686-w64-mingw32/bin/openocd.exe",
+      "interface": "swd",
+      "device": "STM32G431CBU",
+      "cwd": "${workspaceFolder}/build-win",
       "executable": "MCSDK-project1.elf",
       "showDevDebugOutput": "raw",
       "configFiles": [
