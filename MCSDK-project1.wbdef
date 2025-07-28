@@ -74,7 +74,7 @@
         <define key="M1_CURR_SAMPLING_TIME" value="6" />
         <define key="M1_CURRENT_AMPLIFICATION_TOPO" value="INT_DIFFERENTIAL" />
         <define key="M1_CURRENT_SENSING_TOPO" value="THREE_SHUNT" />
-        <define key="M1_DAC_CURRENT_THRESHOLD" value="2893" />
+        <define key="M1_DAC_CURRENT_THRESHOLD" value="4083" />
         <define key="M1_DBG_OPEN_LOOP_ENABLE" value="FALSE" />
         <define key="M1_DC_CURRENT_RS_MEAS" value="5" />
         <define key="M1_DEFAULT_CONTROL_MODE" value="STC_SPEED_MODE" />
@@ -440,11 +440,11 @@
         <define key="WB_UI_GOP" value="16" />
         <define key="WB_UI_INERTIA" value="2" />
         <define key="WB_UI_MAGNETIC_STRUCTURE" value="SM-PMSM" />
-        <define key="WB_UI_MAX_CURRENT" value="20" />
+        <define key="WB_UI_MAX_CURRENT" value="10" />
         <define key="WB_UI_MAX_NOMINAL_DC_VOLTAGE" value="15" />
         <define key="WB_UI_MAX_PWMFREQUENCY" value="100000" />
         <define key="WB_UI_MOTOR_DESCRIPTION" value="Outrunner sensorless BLDC" />
-        <define key="WB_UI_OCP_THRESHOLD" value="10" />
+        <define key="WB_UI_OCP_THRESHOLD" value="45" />
         <define key="WB_UI_PW_BOARD_MAX_RATED_CURRENT" value="40" />
         <define key="WB_UI_PW_BOARD_MAX_VOLTAGE" value="28" />
         <define key="WB_UI_PW_BOARD_MIN_VOLTAGE" value="8" />

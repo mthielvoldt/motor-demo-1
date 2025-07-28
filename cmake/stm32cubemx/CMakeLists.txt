@@ -18,7 +18,7 @@ set(MX_Include_Dirs
     ${CMAKE_CURRENT_SOURCE_DIR}/../../MCSDK_v6.4.0-Full/MotorControl/MCSDK/MCLib/G4xx/Inc
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/CMSIS/Include
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../../Drivers/CMSIS/DSP/Include
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/CMSIS/DSP/Include
 )
 
 # STM32CubeMX generated application sources
