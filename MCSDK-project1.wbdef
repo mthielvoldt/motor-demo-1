@@ -134,10 +134,10 @@
         <define key="M1_OCP_COMP_W" value="COMP4" />
         <define key="M1_OCP_DAC_CHANNEL_U" value="OUT1" />
         <define key="M1_OCP_DAC_CHANNEL_V" value="OUT2" />
-        <define key="M1_OCP_DAC_CHANNEL_W" value="OUT2" />
-        <define key="M1_OCP_DAC_U" value="DAC3" />
-        <define key="M1_OCP_DAC_V" value="DAC3" />
-        <define key="M1_OCP_DAC_W" value="DAC3" />
+        <define key="M1_OCP_DAC_CHANNEL_W" value="OUT1" />
+        <define key="M1_OCP_DAC_U" value="DAC1" />
+        <define key="M1_OCP_DAC_V" value="DAC1" />
+        <define key="M1_OCP_DAC_W" value="DAC1" />
         <define key="M1_OCP_DESTINATION" value="TIM_BKIN" />
         <define key="M1_OCP_TOPOLOGY" value="EMBEDDED" />
         <define key="M1_OFST" value="{0,0,0,0,0,0,0,0}" />
@@ -261,7 +261,7 @@
         <define key="OCP_INVERTINGINPUT_MODE" value="INT_MODE" />
         <define key="OCP_SELECTION" value="COMP_Selection_COMP1" />
         <define key="OCPA_DAC_INTERNAL_PIN" value="TRUE" />
-        <define key="OCPA_INVERTINGINPUT" value="COMPX_InvertingInput_DAC3" />
+        <define key="OCPA_INVERTINGINPUT" value="COMPX_InvertingInput_DAC1" />
         <define key="OCPA_INVERTINGINPUT_DAC_OUT" value="OUT1" />
         <define key="OCPA_INVERTINGINPUT_GPIO_PIN" value="GPIO_Pin_4" />
         <define key="OCPA_INVERTINGINPUT_GPIO_PORT" value="GPIOA" />
@@ -276,7 +276,7 @@
         <define key="OCPA_OUTPUTPOL" value="COMP_OutputPol_NonInverted" />
         <define key="OCPA_SELECTION" value="COMP_Selection_COMP1" />
         <define key="OCPB_DAC_INTERNAL_PIN" value="TRUE" />
-        <define key="OCPB_INVERTINGINPUT" value="COMPX_InvertingInput_DAC3" />
+        <define key="OCPB_INVERTINGINPUT" value="COMPX_InvertingInput_DAC1" />
         <define key="OCPB_INVERTINGINPUT_DAC_OUT" value="OUT2" />
         <define key="OCPB_INVERTINGINPUT_GPIO_PIN" value="GPIO_Pin_4" />
         <define key="OCPB_INVERTINGINPUT_GPIO_PORT" value="GPIOA" />
@@ -291,8 +291,8 @@
         <define key="OCPB_OUTPUTPOL" value="COMP_OutputPol_NonInverted" />
         <define key="OCPB_SELECTION" value="COMP_Selection_COMP2" />
         <define key="OCPC_DAC_INTERNAL_PIN" value="TRUE" />
-        <define key="OCPC_INVERTINGINPUT" value="COMPX_InvertingInput_DAC3" />
-        <define key="OCPC_INVERTINGINPUT_DAC_OUT" value="OUT2" />
+        <define key="OCPC_INVERTINGINPUT" value="COMPX_InvertingInput_DAC1" />
+        <define key="OCPC_INVERTINGINPUT_DAC_OUT" value="OUT1" />
         <define key="OCPC_INVERTINGINPUT_GPIO_PIN" value="GPIO_Pin_4" />
         <define key="OCPC_INVERTINGINPUT_GPIO_PORT" value="GPIOA" />
         <define key="OCPC_INVERTINGINPUT_MODE" value="INT_MODE" />

@@ -49,7 +49,7 @@ COMP_HandleTypeDef hcomp4;
 
 CORDIC_HandleTypeDef hcordic;
 
-DAC_HandleTypeDef hdac3;
+DAC_HandleTypeDef hdac1;
 
 OPAMP_HandleTypeDef hopamp1;
 OPAMP_HandleTypeDef hopamp2;
@@ -75,7 +75,7 @@ static void MX_COMP1_Init(void);
 static void MX_COMP2_Init(void);
 static void MX_COMP4_Init(void);
 static void MX_CORDIC_Init(void);
-static void MX_DAC3_Init(void);
+static void MX_DAC1_Init(void);
 static void MX_OPAMP1_Init(void);
 static void MX_OPAMP2_Init(void);
 static void MX_OPAMP3_Init(void);
@@ -127,7 +127,7 @@ int main(void)
   MX_COMP2_Init();
   MX_COMP4_Init();
   MX_CORDIC_Init();
-  MX_DAC3_Init();
+  MX_DAC1_Init();
   MX_OPAMP1_Init();
   MX_OPAMP2_Init();
   MX_OPAMP3_Init();
@@ -433,7 +433,7 @@ static void MX_COMP1_Init(void)
   /* USER CODE END COMP1_Init 1 */
   hcomp1.Instance = COMP1;
   hcomp1.Init.InputPlus = COMP_INPUT_PLUS_IO1;
-  hcomp1.Init.InputMinus = COMP_INPUT_MINUS_DAC3_CH1;
+  hcomp1.Init.InputMinus = COMP_INPUT_MINUS_DAC1_CH1;
   hcomp1.Init.OutputPol = COMP_OUTPUTPOL_NONINVERTED;
   hcomp1.Init.Hysteresis = COMP_HYSTERESIS_NONE;
   hcomp1.Init.BlankingSrce = COMP_BLANKINGSRC_NONE;
@@ -465,7 +465,7 @@ static void MX_COMP2_Init(void)
   /* USER CODE END COMP2_Init 1 */
   hcomp2.Instance = COMP2;
   hcomp2.Init.InputPlus = COMP_INPUT_PLUS_IO1;
-  hcomp2.Init.InputMinus = COMP_INPUT_MINUS_DAC3_CH2;
+  hcomp2.Init.InputMinus = COMP_INPUT_MINUS_DAC1_CH2;
   hcomp2.Init.OutputPol = COMP_OUTPUTPOL_NONINVERTED;
   hcomp2.Init.Hysteresis = COMP_HYSTERESIS_NONE;
   hcomp2.Init.BlankingSrce = COMP_BLANKINGSRC_NONE;
@@ -497,7 +497,7 @@ static void MX_COMP4_Init(void)
   /* USER CODE END COMP4_Init 1 */
   hcomp4.Instance = COMP4;
   hcomp4.Init.InputPlus = COMP_INPUT_PLUS_IO1;
-  hcomp4.Init.InputMinus = COMP_INPUT_MINUS_DAC3_CH2;
+  hcomp4.Init.InputMinus = COMP_INPUT_MINUS_DAC1_CH1;
   hcomp4.Init.OutputPol = COMP_OUTPUTPOL_NONINVERTED;
   hcomp4.Init.Hysteresis = COMP_HYSTERESIS_NONE;
   hcomp4.Init.BlankingSrce = COMP_BLANKINGSRC_NONE;
@@ -539,27 +539,27 @@ static void MX_CORDIC_Init(void)
 }
 
 /**
-  * @brief DAC3 Initialization Function
+  * @brief DAC1 Initialization Function
   * @param None
   * @retval None
   */
-static void MX_DAC3_Init(void)
+static void MX_DAC1_Init(void)
 {
 
-  /* USER CODE BEGIN DAC3_Init 0 */
+  /* USER CODE BEGIN DAC1_Init 0 */
 
-  /* USER CODE END DAC3_Init 0 */
+  /* USER CODE END DAC1_Init 0 */
 
   DAC_ChannelConfTypeDef sConfig = {0};
 
-  /* USER CODE BEGIN DAC3_Init 1 */
+  /* USER CODE BEGIN DAC1_Init 1 */
 
-  /* USER CODE END DAC3_Init 1 */
+  /* USER CODE END DAC1_Init 1 */
 
   /** DAC Initialization
   */
-  hdac3.Instance = DAC3;
-  if (HAL_DAC_Init(&hdac3) != HAL_OK)
+  hdac1.Instance = DAC1;
+  if (HAL_DAC_Init(&hdac1) != HAL_OK)
   {
     Error_Handler();
   }
@@ -575,20 +575,20 @@ static void MX_DAC3_Init(void)
   sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_DISABLE;
   sConfig.DAC_ConnectOnChipPeripheral = DAC_CHIPCONNECT_INTERNAL;
   sConfig.DAC_UserTrimming = DAC_TRIMMING_FACTORY;
-  if (HAL_DAC_ConfigChannel(&hdac3, &sConfig, DAC_CHANNEL_1) != HAL_OK)
+  if (HAL_DAC_ConfigChannel(&hdac1, &sConfig, DAC_CHANNEL_1) != HAL_OK)
   {
     Error_Handler();
   }
 
   /** DAC channel OUT2 config
   */
-  if (HAL_DAC_ConfigChannel(&hdac3, &sConfig, DAC_CHANNEL_2) != HAL_OK)
+  if (HAL_DAC_ConfigChannel(&hdac1, &sConfig, DAC_CHANNEL_2) != HAL_OK)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN DAC3_Init 2 */
+  /* USER CODE BEGIN DAC1_Init 2 */
 
-  /* USER CODE END DAC3_Init 2 */
+  /* USER CODE END DAC1_Init 2 */
 
 }
 

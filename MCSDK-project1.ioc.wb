@@ -337,35 +337,35 @@ ExtraMW.MotorControl.Root=MCSDK_v6.4.0-Full/MotorControl
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 # OVER CURRENT PROTECTION                                                                                              #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-#                                              DAC3_Internal_Pin_OUT1 (2)                                              #
+#                                              DAC1_Internal_Pin_OUT1 (2)                                              #
 #......................................................................................................................#
-VP_DAC3_VS_DACI1.Mode=DAC_OUT1_Int
-VP_DAC3_VS_DACI1.Signal=DAC3_VS_DACI1
+VP_DAC1_VS_DACI1.Mode=DAC_OUT1_Int
+VP_DAC1_VS_DACI1.Signal=DAC1_VS_DACI1
 #......................................................................................................................#
 #                                    COMP1_NonInvertingInput_PA1_OUT1 Settings_comp                                    #
 #......................................................................................................................#
-VP_COMP1_VS_DAC3OUT1.Mode=INM_DAC3OUT1
-VP_COMP1_VS_DAC3OUT1.Signal=COMP1_VS_DAC3OUT1
+VP_COMP1_VS_DAC1OUT1.Mode=INM_DAC1OUT1
+VP_COMP1_VS_DAC1OUT1.Signal=COMP1_VS_DAC1OUT1
 #......................................................................................................................#
-#                                             DAC3_Internal_Pin_OUT2 (1.0)                                             #
+#                                             DAC1_Internal_Pin_OUT2 (1.0)                                             #
 #......................................................................................................................#
-DAC3.DAC_Channel-DAC_OUT2_Int=DAC_CHANNEL_2
-DAC3.IPParameters=DAC_Channel-DAC_OUT2_Int
+DAC1.DAC_Channel-DAC_OUT2_Int=DAC_CHANNEL_2
+DAC1.IPParameters=DAC_Channel-DAC_OUT2_Int
 #......................................................................................................................#
-#                                      Virtual_pinDAC3_VS_DACI2_DAC_OUT2_Int (1.1)                                     #
+#                                      Virtual_pinDAC1_VS_DACI2_DAC_OUT2_Int (1.1)                                     #
 #......................................................................................................................#
-VP_DAC3_VS_DACI2.Mode=DAC_OUT2_Int
-VP_DAC3_VS_DACI2.Signal=DAC3_VS_DACI2
+VP_DAC1_VS_DACI2.Mode=DAC_OUT2_Int
+VP_DAC1_VS_DACI2.Signal=DAC1_VS_DACI2
 #......................................................................................................................#
 #                                    COMP2_NonInvertingInput_PA7_OUT2 Settings_comp                                    #
 #......................................................................................................................#
-VP_COMP2_VS_DAC3OUT2.Mode=INM_DAC3OUT2
-VP_COMP2_VS_DAC3OUT2.Signal=COMP2_VS_DAC3OUT2
+VP_COMP2_VS_DAC1OUT2.Mode=INM_DAC1OUT2
+VP_COMP2_VS_DAC1OUT2.Signal=COMP2_VS_DAC1OUT2
 #......................................................................................................................#
-#                                    COMP4_NonInvertingInput_PB0_OUT2 Settings_comp                                    #
+#                                    COMP4_NonInvertingInput_PB0_OUT1 Settings_comp                                    #
 #......................................................................................................................#
-VP_COMP4_VS_DAC3OUT2.Mode=INM_DAC3OUT2
-VP_COMP4_VS_DAC3OUT2.Signal=COMP4_VS_DAC3OUT2
+VP_COMP4_VS_DAC1OUT1.Mode=INM_DAC1OUT1
+VP_COMP4_VS_DAC1OUT1.Signal=COMP4_VS_DAC1OUT1
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #                                                                                                                      #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
@@ -1173,14 +1173,14 @@ Mcu.Pin6=PA14
 Mcu.Pin7=VP_SYS_VS_Systick
 Mcu.Pin8=VP_SYS_VS_DBSignals
 Mcu.Pin9=VP_MotorControl_MC_ENABLED
-Mcu.Pin10=VP_DAC3_VS_DACI1
+Mcu.Pin10=VP_DAC1_VS_DACI1
 Mcu.Pin11=PA1
-Mcu.Pin12=VP_COMP1_VS_DAC3OUT1
-Mcu.Pin13=VP_DAC3_VS_DACI2
+Mcu.Pin12=VP_COMP1_VS_DAC1OUT1
+Mcu.Pin13=VP_DAC1_VS_DACI2
 Mcu.Pin14=PA7
-Mcu.Pin15=VP_COMP2_VS_DAC3OUT2
+Mcu.Pin15=VP_COMP2_VS_DAC1OUT2
 Mcu.Pin16=PB0
-Mcu.Pin17=VP_COMP4_VS_DAC3OUT2
+Mcu.Pin17=VP_COMP4_VS_DAC1OUT1
 Mcu.Pin18=VP_TIM1_VS_no_output4
 Mcu.Pin19=PA8
 Mcu.Pin20=PC13
@@ -1214,7 +1214,7 @@ Mcu.IP3=RCC
 Mcu.IP4=MotorControl
 Mcu.IP5=TIM1
 Mcu.IP6=COMP1
-Mcu.IP7=DAC3
+Mcu.IP7=DAC1
 Mcu.IP8=COMP2
 Mcu.IP9=COMP4
 Mcu.IP10=OPAMP1
@@ -1273,7 +1273,7 @@ MotorControl.HWV_OCP=ThreeShunt_RawCurrents_Protection_IntRef
 MotorControl.HWV_POTENTIOMETER=Potentiometer
 MotorControl.HWV_PWM=DrivingHighAndLowSides
 MotorControl.INVERTERBOARD=ESC_G4
-MotorControl.IPs=CORDIC,SYS,NVIC,RCC,MotorControl,TIM1,COMP1,DAC3,COMP2,COMP4,OPAMP1,OPAMP2,OPAMP3,ADC1,ADC2,USART2,DMA
+MotorControl.IPs=CORDIC,SYS,NVIC,RCC,MotorControl,TIM1,COMP1,DAC1,COMP2,COMP4,OPAMP1,OPAMP2,OPAMP3,ADC1,ADC2,USART2,DMA
 MotorControl.LOW_MEMORY_FOOTPRINT_REG=false
 MotorControl.LOW_SIDE_IDLE_STATE=false
 MotorControl.LOW_SIDE_SIGNALS_ENABLING=LS_PWM_TIMER
@@ -1369,10 +1369,10 @@ MotorControl.M1_OCP_COMP_V=COMP2
 MotorControl.M1_OCP_COMP_W=COMP4
 MotorControl.M1_OCP_DAC_CHANNEL_U=OUT1
 MotorControl.M1_OCP_DAC_CHANNEL_V=OUT2
-MotorControl.M1_OCP_DAC_CHANNEL_W=OUT2
-MotorControl.M1_OCP_DAC_U=DAC3
-MotorControl.M1_OCP_DAC_V=DAC3
-MotorControl.M1_OCP_DAC_W=DAC3
+MotorControl.M1_OCP_DAC_CHANNEL_W=OUT1
+MotorControl.M1_OCP_DAC_U=DAC1
+MotorControl.M1_OCP_DAC_V=DAC1
+MotorControl.M1_OCP_DAC_W=DAC1
 MotorControl.M1_OCP_DESTINATION=TIM_BKIN
 MotorControl.M1_OCP_TOPOLOGY=EMBEDDED
 MotorControl.M1_OFST={0,0,0,0,0,0,0,0}
@@ -1496,7 +1496,7 @@ MotorControl.OCP_INVERTINGINPUT=COMPX_InvertingInput_V_REF
 MotorControl.OCP_INVERTINGINPUT_MODE=INT_MODE
 MotorControl.OCP_SELECTION=COMP1
 MotorControl.OCPA_DAC_INTERNAL_PIN=true
-MotorControl.OCPA_INVERTINGINPUT=COMPX_InvertingInput_DAC3
+MotorControl.OCPA_INVERTINGINPUT=COMPX_InvertingInput_DAC1
 MotorControl.OCPA_INVERTINGINPUT_DAC_OUT=OUT1
 MotorControl.OCPA_INVERTINGINPUT_GPIO_PIN=LL_GPIO_PIN_4
 MotorControl.OCPA_INVERTINGINPUT_GPIO_PORT=GPIOA
@@ -1511,7 +1511,7 @@ MotorControl.OCPA_OUTPUT_MODE=INT_MODE
 MotorControl.OCPA_OUTPUTPOL=COMP_OutputPol_NonInverted
 MotorControl.OCPA_SELECTION=COMP1
 MotorControl.OCPB_DAC_INTERNAL_PIN=true
-MotorControl.OCPB_INVERTINGINPUT=COMPX_InvertingInput_DAC3
+MotorControl.OCPB_INVERTINGINPUT=COMPX_InvertingInput_DAC1
 MotorControl.OCPB_INVERTINGINPUT_DAC_OUT=OUT2
 MotorControl.OCPB_INVERTINGINPUT_GPIO_PIN=LL_GPIO_PIN_4
 MotorControl.OCPB_INVERTINGINPUT_GPIO_PORT=GPIOA
@@ -1526,8 +1526,8 @@ MotorControl.OCPB_OUTPUT_MODE=INT_MODE
 MotorControl.OCPB_OUTPUTPOL=COMP_OutputPol_NonInverted
 MotorControl.OCPB_SELECTION=COMP2
 MotorControl.OCPC_DAC_INTERNAL_PIN=true
-MotorControl.OCPC_INVERTINGINPUT=COMPX_InvertingInput_DAC3
-MotorControl.OCPC_INVERTINGINPUT_DAC_OUT=OUT2
+MotorControl.OCPC_INVERTINGINPUT=COMPX_InvertingInput_DAC1
+MotorControl.OCPC_INVERTINGINPUT_DAC_OUT=OUT1
 MotorControl.OCPC_INVERTINGINPUT_GPIO_PIN=LL_GPIO_PIN_4
 MotorControl.OCPC_INVERTINGINPUT_GPIO_PORT=GPIOA
 MotorControl.OCPC_INVERTINGINPUT_MODE=INT_MODE
@@ -1701,7 +1701,7 @@ MotorControl.WB_UI_VPOL_K=0.1285625
 # 7-MX_COMP2_Init-COMP2-false-HAL-true,\                                                                               #
 # 8-MX_COMP4_Init-COMP4-false-HAL-true,\                                                                               #
 # 9-MX_CORDIC_Init-CORDIC-false-HAL-true,\                                                                             #
-# 10-MX_DAC3_Init-DAC3-false-HAL-true,\                                                                                #
+# 10-MX_DAC1_Init-DAC1-false-HAL-true,\                                                                                #
 # 11-MX_OPAMP1_Init-OPAMP1-false-HAL-true,\                                                                            #
 # 12-MX_OPAMP2_Init-OPAMP2-false-HAL-true,\                                                                            #
 # 13-MX_OPAMP3_Init-OPAMP3-false-HAL-true,\                                                                            #
