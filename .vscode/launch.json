@@ -30,7 +30,7 @@
       "device": "STM32G431CBU",
       "cwd": "${workspaceFolder}/build-win",
       "executable": "MCSDK-project1.elf",
-      "showDevDebugOutput": "raw",
+      "showDevDebugOutput": "none",
       "configFiles": [
         "interface/stlink.cfg",
         "target/stm32g4x.cfg",
