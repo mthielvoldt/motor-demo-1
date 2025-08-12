@@ -6,5 +6,7 @@ if(PCB STREQUAL "0")
   add_compile_definitions("STM32G431xx")
 endif()
 
+add_compile_definitions("${MCU_FAMILY}")
+
 message(STATUS "PCB: ${PCB}")
 message(STATUS "MCU: ${MCU_VARIANT}")
