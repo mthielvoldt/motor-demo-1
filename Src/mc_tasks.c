@@ -36,6 +36,10 @@
 #include "mc_app_hooks.h"
 
 /* USER CODE BEGIN Includes */
+#ifdef USE_FIRMENT_COMMS
+#include <fmt_rx.h> // fmt_handleRx()
+#include "fmt/config/message_handlers.h"
+#endif
 
 /* USER CODE END Includes */
 
@@ -210,6 +214,10 @@ __weak void MC_RunMotorControlTasks(void)
       }
 
       /* USER CODE BEGIN MC_Scheduler 1 */
+      #ifdef USE_FIRMENT_COMMS
+      fmt_handleRx();
+      handleTelemetry();
+      #endif 
 
       /* USER CODE END MC_Scheduler 1 */
 

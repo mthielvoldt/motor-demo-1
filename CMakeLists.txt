@@ -33,7 +33,9 @@ add_subdirectory(${PORT_DIR} ${MCU_FAMILY}) # provides MCUPort library.
 add_subdirectory(${FIRMENT_DIR} firment)
 ### end Firment
 
-add_executable(${CMAKE_PROJECT_NAME})
+add_executable(${CMAKE_PROJECT_NAME}
+  Src/fmt/message_handlers.c
+)
 
 # Using link order to have firment libs override certain function definitions. 
 # Specifically in this application: USART2_IRQHandler(), HAL_UART_MspInit()
@@ -47,9 +49,10 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
 add_subdirectory(cmake/stm32cubemx)
 
 
-target_sources(${CMAKE_PROJECT_NAME} PRIVATE
-  Src/fmt/project_comms.c
-)
+# target_sources(${CMAKE_PROJECT_NAME} PRIVATE
+#   Src/fmt/message_handlers.c
+# )
+target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE USE_FIRMENT_COMMS)
 
 
 # Remove wrong libob.a library dependency when using cpp files

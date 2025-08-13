@@ -34,6 +34,9 @@ extern DMA_HandleTypeDef hdma_usart2_tx;
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN Define */
+#ifdef USE_FIRMENT_COMMS
+#define HAL_UART_MspInit static __attribute__((unused)) overriddenFunction
+#endif
 
 /* USER CODE END Define */
 

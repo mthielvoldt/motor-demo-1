@@ -35,6 +35,9 @@
 #include "mcp_config.h"
 
 /* USER CODE BEGIN Includes */
+#ifdef USE_FIRMENT_COMMS
+#define USART2_IRQHandler static __attribute__((unused)) overriddenFunction
+#endif
 
 /* USER CODE END Includes */
 

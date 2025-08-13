@@ -21,6 +21,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#ifdef USE_FIRMENT_COMMS
+#include "fmt/config/message_handlers.h"
+#endif
 
 /* USER CODE END Includes */
 
@@ -57,7 +60,9 @@ OPAMP_HandleTypeDef hopamp3;
 
 TIM_HandleTypeDef htim1;
 
+#ifndef USE_FIRMENT_COMMS
 UART_HandleTypeDef huart2;
+#endif
 DMA_HandleTypeDef hdma_usart2_rx;
 DMA_HandleTypeDef hdma_usart2_tx;
 
@@ -139,6 +144,10 @@ int main(void)
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
 
+  #ifdef USE_FIRMENT_COMMS
+  initFirmentComms();
+  #endif
+  
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -807,7 +816,7 @@ static void MX_USART2_UART_Init(void)
 {
 
   /* USER CODE BEGIN USART2_Init 0 */
-
+  #ifndef USE_FIRMENT_COMMS
   /* USER CODE END USART2_Init 0 */
 
   /* USER CODE BEGIN USART2_Init 1 */
@@ -841,7 +850,7 @@ static void MX_USART2_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART2_Init 2 */
-
+  #endif
   /* USER CODE END USART2_Init 2 */
 
 }
