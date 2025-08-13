@@ -8,13 +8,13 @@ function App() {
   return (
     <>
       <div className='row-container'>
-        <h1>Firment Function Generator Example</h1>
+        <h1>ST Motor Control + Firment</h1>
         <BrokerAddress />
       </div>
       <div className="row-container">
         <div className='widget-column'>
           <h2>Commands</h2>
-          <widgets.WaveformCtl />
+          <widgets.MotorCtl />
           <widgets.RunScanCtl />
           <Image />
           <Reset />
@@ -22,7 +22,7 @@ function App() {
         <div className='widget-column'>
           <h2>Telemetry</h2>
           <Version />
-          <widgets.WaveformTlm />
+          <widgets.MotorTlm />
           <Log />
         </div>
         <div className='plot-column'>
