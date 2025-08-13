@@ -1,0 +1,39 @@
+// A message structure to control a signal generator's output waveform.
+
+syntax = "proto3";
+import "firment_msg.proto";
+
+/* Project-specific messages */
+enum DriveMode {
+  SPEED = 0;
+  TORQUE = 1;
+}
+
+message MotorCtl {
+  bool run = 1;
+  DriveMode driveMode = 2;
+  float speedRpm = 3;
+  float current = 4;
+}
+
+message MotorTlm {
+  float busVoltageV = 1;
+  sint32 currentMa = 2;
+}
+
+
+message Top {
+  oneof sub {
+    Ack Ack = 1;
+    Log Log = 2;
+    TouchParam TouchParam = 3;
+    ProbeSignals ProbeSignals = 4;
+    RunScanCtl RunScanCtl = 5;
+    ImageData ImageData = 6;
+    PageStatus PageStatus = 7;
+    MotorCtl MotorCtl = 8;
+    MotorTlm MotorTlm = 9;
+    Reset Reset = 10;
+    Version Version = 11;
+  }
+}
