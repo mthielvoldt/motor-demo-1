@@ -1,14 +1,30 @@
 {
-    "C_Cpp.default.includePath": [
-        "Inc",
-        "Drivers/STM32G4xx_HAL_Driver/Inc",
-        "Drivers/CMSIS/Include",
-        "Drivers/CMSIS/Core/Include",
-        "Drivers/CMSIS/Device/ST/STM32G4xx/Include",
-        "MCSDK_v6.4.0-Full/MotorControl/MCSDK/MCLib/Any/Inc",
-        "MCSDK_v6.4.0-Full/MotorControl/MCSDK/MCLib/G4xx/Inc"
-    ],
-    "C_Cpp.default.defines": [
-        "STM32G431xx"
-    ]
+  "C_Cpp.default.compilerPath": "/home/rileyt/compilers/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "C_Cpp.default.includePath": [
+    "build/pcb0/firment",
+    "Drivers/STM32G4xx_HAL_Driver/Inc",
+    "Drivers/CMSIS/Include",
+    "Drivers/CMSIS/Core/Include",
+    "Drivers/CMSIS/Device/ST/STM32G4xx/Include",
+    "firment/firmware",
+    "firment/firmware/port/stm32",
+    "firment/protocol/nanopb",
+    "Inc",
+    "MCSDK_v6.4.0-Full/MotorControl/MCSDK/MCLib/Any/Inc",
+    "MCSDK_v6.4.0-Full/MotorControl/MCSDK/MCLib/G4xx/Inc",
+    "Src/fmt/config/pcb0",
+  ],
+  "C_Cpp.default.defines": [
+    "STM32G431xx",
+    "USE_FIRMENT_COMMS",
+    "stm32g4",
+  ],
+  "files.associations": {
+    "stm32g4xx_hal_dma.h": "c",
+    "mcpa.h": "c",
+    "main.h": "c",
+    "stm32g4xx_hal.h": "c",
+    "fmt_transport.h": "c",
+    "queue.h": "c"
+  }
 }

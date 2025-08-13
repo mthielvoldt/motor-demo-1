@@ -12,7 +12,7 @@
       "servertype": "openocd",
       "interface": "swd",
       "device": "STM32G431CBU",
-      "cwd": "${workspaceFolder}/build",
+      "cwd": "${workspaceFolder}/build/pcb0",
       "executable": "MCSDK-project1.elf",
       "showDevDebugOutput": "raw",
       "configFiles": [
