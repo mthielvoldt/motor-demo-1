@@ -4,21 +4,59 @@ syntax = "proto3";
 import "firment_msg.proto";
 
 /* Project-specific messages */
-enum DriveMode {
-  SPEED = 0;
-  TORQUE = 1;
+enum MotorState {
+  IDLE = 0;
+  ICLWAIT = 12;
+  ALIGNMENT = 2;
+  CHARGE_BOOT_CAP = 16;
+  OFFSET_CALIB = 17;
+  START = 4;
+  SWITCH_OVER = 19;
+  RUN = 6;
+  STOP = 8;
+  FAULT_NOW = 10;
+  FAULT_OVER = 11;
+  WAIT_STOP_MOTOR = 20;
+  OTF_DETECTION = 21;
+  OTF_BRAKE = 22;
 }
 
 message MotorCtl {
   bool run = 1;
-  DriveMode driveMode = 2;
-  float speedRpm = 3;
-  float current = 4;
+  sint32 speedRpm = 2;
+  float currentA = 3;
+  uint32 rpmPerSec = 4;
 }
 
 message MotorTlm {
-  float busVoltageV = 1;
-  sint32 currentMa = 2;
+  MotorState motorState = 1;
+  sint32 speedRpm = 2;
+  sint32 currentMa = 3;
+  float busVoltageV = 4;
+  int32 uptime = 5;
+}
+
+message CurrentFaultTlm {
+bool DURATION = 1;   /* FOC rate to high. */
+bool OVER_VOLT = 2;  /* Software over voltage. */
+bool UNDER_VOLT = 3; /* Software under voltage. */
+bool OVER_TEMP = 4;  /* Software over temperature. */
+bool START_UP = 5;   /* Startup failed. */
+bool SPEED_FDBK = 6; /* Speed feedback. */
+bool OVER_CURR = 7;  /* Emergency input (Over current). */
+bool SW_ERROR = 8;   /* Software Error. */
+bool DP_FAULT = 9;   /* Driver protection fault. */
+}
+message PastFaultTlm {
+bool DURATION = 1;   /* FOC rate to high. */
+bool OVER_VOLT = 2;  /* Software over voltage. */
+bool UNDER_VOLT = 3; /* Software under voltage. */
+bool OVER_TEMP = 4;  /* Software over temperature. */
+bool START_UP = 5;   /* Startup failed. */
+bool SPEED_FDBK = 6; /* Speed feedback. */
+bool OVER_CURR = 7;  /* Emergency input (Over current). */
+bool SW_ERROR = 8;   /* Software Error. */
+bool DP_FAULT = 9;   /* Driver protection fault. */
 }
 
 
@@ -31,9 +69,11 @@ message Top {
     RunScanCtl RunScanCtl = 5;
     ImageData ImageData = 6;
     PageStatus PageStatus = 7;
-    MotorCtl MotorCtl = 8;
-    MotorTlm MotorTlm = 9;
-    Reset Reset = 10;
-    Version Version = 11;
+    Version Version = 8;
+    Reset Reset = 9;
+    MotorCtl MotorCtl = 10;
+    MotorTlm MotorTlm = 11;
+    PastFaultTlm PastFaultTlm = 12;
+    CurrentFaultTlm CurrentFaultTlm = 13;
   }
 }
