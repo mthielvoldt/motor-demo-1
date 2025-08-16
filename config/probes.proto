@@ -15,7 +15,6 @@ All signal messages have the same format  */
 enum TestPointId {
   DISCONNECTED = 0;
   BUS_VOLTAGE = 1;
-  // U_CURRENT_ADC = 2;
-  // V_CURRENT_ADC = 3;
-  // W_CURRENT_ADC = 4;
+  CURRENT_1_ADC = 2;
+  CURRENT_2_ADC = 3;
 }

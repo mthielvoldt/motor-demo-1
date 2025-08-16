@@ -6,6 +6,7 @@
 #include <bus_voltage_sensor.h> // VBS_GetAvBusVoltage_V()
 // #include <drive_parameters.h>   // ISR_FREQUENCY_HZ
 #include <parameters_conversion.h> // SYS_TICK_CREQUENCY
+// #include <pwm_curr_fdbk.h> // PWMC_Handle_t
 
 // Dependencies
 #include <fmt_comms.h>
@@ -15,16 +16,20 @@
 // #include <build_time.h> // Generate this?
 
 MCI_Handle_t *motor = &Mci[0];
+// PWMC_Handle_t *pwmHandle;
 BusVoltageSensor_Handle_t *BusVoltageSensor = &BusVoltageSensor_M1._Super;
 
 static bool motorRunning(MCI_Handle_t *motor);
-float convert_BUS_VOLTAGE(void *rawValue);
+float convert_BUS_VOLTAGE(volatile void *rawValue);
 
 bool initFirmentComms(void)
 {
   // ISR_FREQUENCY_HZ
+  // pwmHandle = motor->pPWM;
   gp_init(SYS_TICK_FREQUENCY);
-  gp_initTestPoint(TestPointId_BUS_VOLTAGE, &BusVoltageSensor->AvBusVoltage_d, SRC_TYPE_INT16, convert_BUS_VOLTAGE);
+  gp_initTestPoint(TestPointId_BUS_VOLTAGE, &BusVoltageSensor->AvBusVoltage_d, SRC_TYPE_UINT16, convert_BUS_VOLTAGE);
+  gp_initTestPoint(TestPointId_CURRENT_1_ADC, &ADC1->JDR1, SRC_TYPE_UINT16, NULL);
+  gp_initTestPoint(TestPointId_CURRENT_2_ADC, &ADC2->JDR1, SRC_TYPE_UINT16, NULL);
   bool ok = fmt_initComms();
   return ok;
 }
@@ -152,7 +157,7 @@ bool motorRunning(MCI_Handle_t *motor)
  * Ghost probe converters
  */
 
-float convert_BUS_VOLTAGE(void *rawValue)
+float convert_BUS_VOLTAGE(volatile void *rawValue)
 {
   // Create a dummy struct with the same value as that stored previously.
   BusVoltageSensor_Handle_t tempBusVSens = {
