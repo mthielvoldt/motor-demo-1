@@ -173,6 +173,10 @@ void SysTick_Handler(void)
 static uint8_t SystickDividerCounter = SYSTICK_DIVIDER;
   /* USER CODE BEGIN SysTick_IRQn 0 */
 
+#ifdef USE_FIRMENT_COMMS
+  gp_periodic();
+#endif
+
   /* USER CODE END SysTick_IRQn 0 */
   if (SystickDividerCounter == SYSTICK_DIVIDER)
   {

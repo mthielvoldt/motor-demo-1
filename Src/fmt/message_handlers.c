@@ -4,9 +4,13 @@
 #include <mc_interface.h>       // MC_StartMotor()
 #include <mc_config.h>          // extern Mci[]
 #include <bus_voltage_sensor.h> // VBS_GetAvBusVoltage_V()
+// #include <drive_parameters.h>   // ISR_FREQUENCY_HZ
+#include <parameters_conversion.h> // SYS_TICK_CREQUENCY
 
 // Dependencies
 #include <fmt_comms.h>
+#include <ghostProbe.h>
+
 #include <stdlib.h>
 // #include <build_time.h> // Generate this?
 
@@ -14,9 +18,13 @@ MCI_Handle_t *motor = &Mci[0];
 BusVoltageSensor_Handle_t *BusVoltageSensor = &BusVoltageSensor_M1._Super;
 
 static bool motorRunning(MCI_Handle_t *motor);
+float convert_BUS_VOLTAGE(void *rawValue);
 
 bool initFirmentComms(void)
 {
+  // ISR_FREQUENCY_HZ
+  gp_init(SYS_TICK_FREQUENCY);
+  gp_initTestPoint(TestPointId_BUS_VOLTAGE, &BusVoltageSensor->AvBusVoltage_d, SRC_TYPE_INT16, convert_BUS_VOLTAGE);
   bool ok = fmt_initComms();
   return ok;
 }
@@ -138,4 +146,18 @@ bool motorRunning(MCI_Handle_t *motor)
     break;
   }
   return false;
+}
+
+/**
+ * Ghost probe converters
+ */
+
+float convert_BUS_VOLTAGE(void *rawValue)
+{
+  // Create a dummy struct with the same value as that stored previously.
+  BusVoltageSensor_Handle_t tempBusVSens = {
+      .AvBusVoltage_d = *(uint16_t *)rawValue,
+      .ConversionFactor = BusVoltageSensor->ConversionFactor,
+  };
+  return VBS_GetAvBusVoltage_V(&tempBusVSens);
 }
