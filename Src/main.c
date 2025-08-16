@@ -23,6 +23,8 @@
 /* USER CODE BEGIN Includes */
 #ifdef USE_FIRMENT_COMMS
 #include "fmt/config/message_handlers.h"
+// unlink huart2
+#define huart2 static unusedUart
 #endif
 
 /* USER CODE END Includes */
@@ -60,9 +62,7 @@ OPAMP_HandleTypeDef hopamp3;
 
 TIM_HandleTypeDef htim1;
 
-#ifndef USE_FIRMENT_COMMS
 UART_HandleTypeDef huart2;
-#endif
 DMA_HandleTypeDef hdma_usart2_rx;
 DMA_HandleTypeDef hdma_usart2_tx;
 
@@ -816,7 +816,9 @@ static void MX_USART2_UART_Init(void)
 {
 
   /* USER CODE BEGIN USART2_Init 0 */
-  #ifndef USE_FIRMENT_COMMS
+  #ifdef USE_FIRMENT_COMMS
+  (void)unusedUart; // silence the warning about an unused variable.
+  #else
   /* USER CODE END USART2_Init 0 */
 
   /* USER CODE BEGIN USART2_Init 1 */
