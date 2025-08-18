@@ -25,6 +25,7 @@
 #include "fmt/config/message_handlers.h"
 // unlink huart2
 #define huart2 static unusedUart
+#define hdma_usart2_rx unusedDma
 #endif
 
 /* USER CODE END Includes */
