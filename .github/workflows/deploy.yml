@@ -88,7 +88,7 @@ jobs:
 # The middle
 
       - name: Build UI
-        run: cd web-ui && npm run build
+        run: cd web-ui && npm install && npm run build
 
       - name: Save venv to cache
         if: steps.restore-venv.outputs.cache-hit != 'true'
