@@ -6,7 +6,6 @@ enum SampleFreq {
   FREQ_10_HZ = 10;
   FREQ_30_HZ = 30;
   FREQ_100_HZ = 100;
-  FREQ_1_KHZ = 1000;
 }
 
 /** We use an enum to ID the messages.
@@ -17,4 +16,9 @@ enum TestPointId {
   BUS_VOLTAGE = 1;
   CURRENT_1_ADC = 2;
   CURRENT_2_ADC = 3;
+  CURRENT_Q_AMPS = 4;
+  CURRENT_D_AMPS = 5;
+  SPEED_MEAS_RPM = 6;
+  SPEED_REF_RPM = 7;
+
 }

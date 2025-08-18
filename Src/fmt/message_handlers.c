@@ -20,16 +20,25 @@ MCI_Handle_t *motor = &Mci[0];
 BusVoltageSensor_Handle_t *BusVoltageSensor = &BusVoltageSensor_M1._Super;
 
 static bool motorRunning(MCI_Handle_t *motor);
-float convert_BUS_VOLTAGE(volatile void *rawValue);
+static float convert_BUS_VOLTAGE(volatile void *rawValue);
+static float convert_currentToAmps(volatile void *rawCurrent);
+static float convert_speedToRpm(volatile void *rawSpeed);
+static float convert_speedRefToRpm(volatile void *rawSpeedRef);
 
 bool initFirmentComms(void)
 {
   // ISR_FREQUENCY_HZ
   // pwmHandle = motor->pPWM;
   gp_init(SYS_TICK_FREQUENCY);
+
   gp_initTestPoint(TestPointId_BUS_VOLTAGE, &BusVoltageSensor->AvBusVoltage_d, SRC_TYPE_UINT16, convert_BUS_VOLTAGE);
   gp_initTestPoint(TestPointId_CURRENT_1_ADC, &ADC1->JDR1, SRC_TYPE_UINT16, NULL);
   gp_initTestPoint(TestPointId_CURRENT_2_ADC, &ADC2->JDR1, SRC_TYPE_UINT16, NULL);
+  gp_initTestPoint(TestPointId_CURRENT_D_AMPS, &motor->pFOCVars->Iqd.d, SRC_TYPE_INT16, convert_currentToAmps);
+  gp_initTestPoint(TestPointId_CURRENT_Q_AMPS, &motor->pFOCVars->Iqd.q, SRC_TYPE_INT16, convert_currentToAmps);
+  gp_initTestPoint(TestPointId_SPEED_MEAS_RPM, &motor->pSTC->SPD->hAvrMecSpeedUnit, SRC_TYPE_INT16, convert_speedToRpm);
+  gp_initTestPoint(TestPointId_SPEED_REF_RPM, &motor->pSTC->SpeedRefUnitExt, SRC_TYPE_INT32, convert_speedRefToRpm);
+
   bool ok = fmt_initComms();
   return ok;
 }
@@ -162,7 +171,7 @@ bool motorRunning(MCI_Handle_t *motor)
  * Ghost probe converters
  */
 
-float convert_BUS_VOLTAGE(volatile void *rawValue)
+static float convert_BUS_VOLTAGE(volatile void *rawValue)
 {
   // Create a dummy struct with the same value as that stored previously.
   BusVoltageSensor_Handle_t tempBusVSens = {
@@ -170,4 +179,18 @@ float convert_BUS_VOLTAGE(volatile void *rawValue)
       .ConversionFactor = BusVoltageSensor->ConversionFactor,
   };
   return VBS_GetAvBusVoltage_V(&tempBusVSens);
+}
+
+static float convert_currentToAmps(volatile void *rawCurrent)
+{
+  return *(int16_t*)rawCurrent * motor->pScale->current;
+}
+
+static float convert_speedToRpm(volatile void *rawSpeedAverage)
+{
+  return (float)(*(int16_t*)rawSpeedAverage) * U_RPM / SPEED_UNIT;
+}
+static float convert_speedRefToRpm(volatile void *rawSpeedRef)
+{
+  return (*(int32_t*)rawSpeedRef >> 16) * U_RPM / SPEED_UNIT;
 }
