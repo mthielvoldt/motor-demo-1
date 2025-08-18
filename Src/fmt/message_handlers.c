@@ -55,7 +55,7 @@ void handleTelemetry(void)
             }}});
     break;
   }
-  case 10:
+  case 100:
   {
     uint32_t faultsCombined = MCI_GetFaultState(motor);
     uint16_t pastFaults = faultsCombined & 0xFFFF;
@@ -77,21 +77,26 @@ void handleTelemetry(void)
         .sub = {.PastFaultTlm = pastFaultsMsg},
     });
 
-    CurrentFaultTlm CurrentFaultsMsg = {
-        .DURATION = currentFaults & MC_DURATION,
-        .OVER_VOLT = currentFaults & MC_OVER_VOLT,
-        .UNDER_VOLT = currentFaults & MC_UNDER_VOLT,
-        .OVER_TEMP = currentFaults & MC_OVER_TEMP,
-        .START_UP = currentFaults & MC_START_UP,
-        .SPEED_FDBK = currentFaults & MC_SPEED_FDBK,
-        .OVER_CURR = currentFaults & MC_OVER_CURR,
-        .SW_ERROR = currentFaults & MC_SW_ERROR,
-        .DP_FAULT = currentFaults & MC_DP_FAULT,
-    };
-    fmt_sendMsg((Top){
-        .which_sub = Top_CurrentFaultTlm_tag,
-        .sub = {.CurrentFaultTlm = CurrentFaultsMsg},
-    });
+    // CurrentFaultTlm CurrentFaultsMsg = {
+    //     .DURATION = currentFaults & MC_DURATION,
+    //     .OVER_VOLT = currentFaults & MC_OVER_VOLT,
+    //     .UNDER_VOLT = currentFaults & MC_UNDER_VOLT,
+    //     .OVER_TEMP = currentFaults & MC_OVER_TEMP,
+    //     .START_UP = currentFaults & MC_START_UP,
+    //     .SPEED_FDBK = currentFaults & MC_SPEED_FDBK,
+    //     .OVER_CURR = currentFaults & MC_OVER_CURR,
+    //     .SW_ERROR = currentFaults & MC_SW_ERROR,
+    //     .DP_FAULT = currentFaults & MC_DP_FAULT,
+    // };
+    // fmt_sendMsg((Top){
+    //     .which_sub = Top_CurrentFaultTlm_tag,
+    //     .sub = {.CurrentFaultTlm = CurrentFaultsMsg},
+    // });
+    break;
+  }
+  case 200:
+  {
+    reportCommsErrors();
     break;
   }
   case 999:

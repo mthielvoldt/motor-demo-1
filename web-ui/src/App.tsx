@@ -23,8 +23,8 @@ function App() {
           <h2>Telemetry</h2>
           <Version />
           <widgets.MotorTlm />
-          <widgets.CurrentFaultTlm />
           <widgets.PastFaultTlm />
+          <widgets.FirmentErrorTlm />
           <Log />
         </div>
         <div className='plot-column'>

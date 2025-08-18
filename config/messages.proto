@@ -71,9 +71,10 @@ message Top {
     PageStatus PageStatus = 7;
     Version Version = 8;
     Reset Reset = 9;
-    MotorCtl MotorCtl = 10;
-    MotorTlm MotorTlm = 11;
-    PastFaultTlm PastFaultTlm = 12;
-    CurrentFaultTlm CurrentFaultTlm = 13;
+    FirmentErrorTlm FirmentErrorTlm = 10;
+    MotorCtl MotorCtl = 16;
+    MotorTlm MotorTlm = 17;
+    PastFaultTlm PastFaultTlm = 18;
+    CurrentFaultTlm CurrentFaultTlm = 19;
   }
 }
