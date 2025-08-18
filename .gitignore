@@ -1,5 +1,8 @@
 build*/
-Drivers/
-MCSDK_v6.4.0-Full/
+
+## These could be submodules
+# Drivers/
+# MCSDK_v6.4.0-Full/
+
 scratch.*
 *.bak
