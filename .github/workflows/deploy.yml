@@ -80,18 +80,22 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: build/venv
-          key: venv-${{ hashFiles('protocol/nanopb_py_env.cmake') }}
+          key: venv-${{ hashFiles('firment/protocol/nanopb_py_env.cmake') }}
 
       - name: Cmake Build
         run: . generate.sh 0
+
+# The middle
+
+      - name: Build UI
+        run: cd web-ui && npm run build
 
       - name: Save venv to cache
         if: steps.restore-venv.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
           path: build/venv
-          key: venv-${{ hashFiles('protocol/nanopb_py_env.cmake') }}
-
+          key: venv-${{ hashFiles('firment/protocol/nanopb_py_env.cmake') }}
 
 
       - name: Save UI node_modules to cache
