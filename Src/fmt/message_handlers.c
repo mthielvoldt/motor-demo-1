@@ -50,8 +50,6 @@ void handleTelemetry(void)
   {
   case 0:
   {
-    uint16_t busVoltage = VBS_GetAvBusVoltage_V(BusVoltageSensor);
-
     fmt_sendMsg((Top){
         .which_sub = Top_MotorTlm_tag,
         .sub = {
@@ -59,7 +57,7 @@ void handleTelemetry(void)
                 .motorState = motor->State,
                 .speedRpm = ((int32_t)MCI_GetAvrgMecSpeedUnit(motor) * U_RPM) / SPEED_UNIT,
                 .currentMa = motor->pFOCVars->Iqd.q,
-                .busVoltageV = busVoltage,
+                .busVoltageV = convert_BUS_VOLTAGE(&BusVoltageSensor->AvBusVoltage_d),
                 .uptime = uptime++,
             }}});
     break;
@@ -173,12 +171,7 @@ bool motorRunning(MCI_Handle_t *motor)
 
 static float convert_BUS_VOLTAGE(volatile void *rawValue)
 {
-  // Create a dummy struct with the same value as that stored previously.
-  BusVoltageSensor_Handle_t tempBusVSens = {
-      .AvBusVoltage_d = *(uint16_t *)rawValue,
-      .ConversionFactor = BusVoltageSensor->ConversionFactor,
-  };
-  return VBS_GetAvBusVoltage_V(&tempBusVSens);
+  return (float)(*(uint16_t*)rawValue) * BusVoltageSensor->ConversionFactor / 65536U;
 }
 
 static float convert_currentToAmps(volatile void *rawCurrent)
