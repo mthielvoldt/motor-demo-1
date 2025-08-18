@@ -1,0 +1,137 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy Flow
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: 
+      - 'main'
+  pull_request:
+    branches:
+      - 'main'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+      
+      - name: Restore ARM Toolchain from Cache
+        id: cache-restore-arm-toolchain
+        uses: actions/cache/restore@v4
+        with:
+          path: /opt/arm-none-eabi
+          key: arm-toolchain-${{ runner.os }}-13.3.rel1-x86_64
+      
+      - name: Install ARM Toolchain
+        if: steps.cache-restore-arm-toolchain.outputs.cache-hit != 'true'
+        run: |
+          wget -q https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
+          sudo tar -xf arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz -C /opt
+          sudo mv /opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi /opt/arm-none-eabi
+          rm arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
+
+      - name: Save ARM Toolchain to Cache
+        if: steps.cache-restore-arm-toolchain.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: /opt/arm-none-eabi
+          key: arm-toolchain-${{ runner.os }}-13.3.rel1-x86_64
+
+      - name: Add to Path
+        run: echo "/opt/arm-none-eabi/bin" >> $GITHUB_PATH
+      - name: Verify Installation
+        run: arm-none-eabi-gcc --version
+
+      - name: Get submodule hashes
+        id: submodule-hashes
+        run: echo "wolfboot=$(git -C mgt-boot/deps/wolfBoot/ rev-parse HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Restore UI node_modules from cache
+        id: restore-ui-node
+        uses: actions/cache/restore@v4
+        with:
+          path: web-ui/node_modules
+          key: node-${{ hashFiles('web-ui/package-lock.json') }}
+
+      
+      - name: Restore venv from cache
+        id: restore-venv
+        uses: actions/cache/restore@v4
+        with:
+          path: build/venv
+          key: venv-${{ hashFiles('protocol/nanopb_py_env.cmake') }}
+
+      - name: Cmake Build
+        run: ./generate 0
+
+      - name: Save venv to cache
+        if: steps.restore-venv.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: build/venv
+          key: venv-${{ hashFiles('protocol/nanopb_py_env.cmake') }}
+
+
+
+      - name: Save UI node_modules to cache
+        if: steps.restore-ui-node.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: web-ui/node_modules
+          key: node-${{ hashFiles('web-ui/package-lock.json') }}
+
+      - name: Upload UI for Deploy
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-and-images
+          path: |
+            web-ui/dist
+          compression-level: 0
+
+      - name: Upload UI Artifact for GH Pages
+        # only upload artifacts if this job is triggered by a push to main. 
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload dist folder
+          path: './web-ui/dist'
+
+
+  deploy:
+    # Only run on pushes and manual triggers targeting the main branch. 
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-22.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    defaults:
+      run:
+        working-directory: ./web-ui
+    steps:
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
