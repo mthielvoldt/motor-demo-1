@@ -65,9 +65,8 @@ void handleTelemetry(void)
   case 100:
   {
     uint32_t faultsCombined = MCI_GetFaultState(motor);
+    
     uint16_t pastFaults = faultsCombined & 0xFFFF;
-    uint16_t currentFaults = faultsCombined >> 16;
-
     PastFaultTlm pastFaultsMsg = {
         .DURATION = pastFaults & MC_DURATION,
         .OVER_VOLT = pastFaults & MC_OVER_VOLT,
@@ -84,6 +83,7 @@ void handleTelemetry(void)
         .sub = {.PastFaultTlm = pastFaultsMsg},
     });
 
+    // uint16_t currentFaults = faultsCombined >> 16;
     // CurrentFaultTlm CurrentFaultsMsg = {
     //     .DURATION = currentFaults & MC_DURATION,
     //     .OVER_VOLT = currentFaults & MC_OVER_VOLT,
@@ -171,19 +171,19 @@ bool motorRunning(MCI_Handle_t *motor)
 
 static float convert_BUS_VOLTAGE(volatile void *rawValue)
 {
-  return (float)(*(uint16_t*)rawValue) * BusVoltageSensor->ConversionFactor / 65536U;
+  return (float)(*(uint16_t *)rawValue) * BusVoltageSensor->ConversionFactor / 65536U;
 }
 
 static float convert_currentToAmps(volatile void *rawCurrent)
 {
-  return *(int16_t*)rawCurrent * motor->pScale->current;
+  return *(int16_t *)rawCurrent * motor->pScale->current;
 }
 
 static float convert_speedToRpm(volatile void *rawSpeedAverage)
 {
-  return (float)(*(int16_t*)rawSpeedAverage) * U_RPM / SPEED_UNIT;
+  return (float)(*(int16_t *)rawSpeedAverage) * U_RPM / SPEED_UNIT;
 }
 static float convert_speedRefToRpm(volatile void *rawSpeedRef)
 {
-  return (*(int32_t*)rawSpeedRef >> 16) * U_RPM / SPEED_UNIT;
+  return (*(int32_t *)rawSpeedRef >> 16) * U_RPM / SPEED_UNIT;
 }
