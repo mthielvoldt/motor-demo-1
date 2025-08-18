@@ -83,7 +83,7 @@ jobs:
           key: venv-${{ hashFiles('protocol/nanopb_py_env.cmake') }}
 
       - name: Cmake Build
-        run: ./generate.sh 0
+        run: . generate.sh 0
 
       - name: Save venv to cache
         if: steps.restore-venv.outputs.cache-hit != 'true'
