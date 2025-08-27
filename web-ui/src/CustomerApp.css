@@ -1,0 +1,94 @@
+/* App container centers everything */
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #f3f4f6;
+  padding: 1rem;
+}
+
+/* Card for content */
+.card {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 400px; /* keeps desktop layout narrow */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Buttons */
+.button-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  flex: 1;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  color: white;
+}
+
+.btn.start {
+  background: #16a34a; /* green */
+}
+
+.btn.stop {
+  background: #dc2626; /* red */
+}
+
+.btn:active {
+  opacity: 0.85;
+}
+
+/* Slider */
+.slider-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slider-label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.slider-block input[type="range"] {
+  width: 100%;
+}
+
+.rpm {
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
+
+/* Status display */
+.status {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.status .running {
+  color: #16a34a;
+}
+.status .stopped {
+  color: #4b5563;
+}
+.status .error {
+  color: #dc2626;
+}
