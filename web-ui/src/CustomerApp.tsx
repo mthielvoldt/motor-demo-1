@@ -1,6 +1,7 @@
 // src/App.tsx
 import React, { useEffect, useState } from "react";
 import { setMessageHandler, sendMessage, BrokerAddress } from 'firment-ui';
+import './CustomerApp.css'
 
 enum MotorState {
   Stopped = 0,
@@ -11,7 +12,7 @@ enum MotorState {
 
 interface FanState {
   motorState: number; // required by external module
-  speedRpm: number;
+  speed: number;
 }
 
 interface MotorTlm {
@@ -22,7 +23,7 @@ interface MotorTlm {
 function App() {
   const [state, setState] = useState<FanState>({
     motorState: MotorState.Stopped,
-    speedRpm: 2000,
+    speed: 2000,
   });
 
   useEffect(() => {
@@ -36,7 +37,7 @@ function App() {
     sendMessage("MotorCtl",
       {
         run,
-        speedRpm: state.speedRpm,
+        speedRpm: state.speed,
         rpmPerSec: 500,
       },
       true
@@ -51,7 +52,7 @@ function App() {
     sendCommand(false);
   }
   function handleSpeedChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setState((prev) => ({ ...prev, speedRpm: Number(e.target.value) }));
+    setState((prev) => ({ ...prev, speed: Number(e.target.value) }));
   }
   function handleSpeedSelect() {
     sendCommand(state.motorState === MotorState.Running);
@@ -63,10 +64,8 @@ function App() {
         return "Running";
       case MotorState.Stopped:
         return "Stopped";
-      case MotorState.Error:
-        return "Error";
       default:
-        return "Unknown";
+        return "Error";
     }
   }
   function getCustomerMotorState(tlm: MotorTlm) {
@@ -86,40 +85,38 @@ function App() {
   }
 
   return (
-    <div className="p-6 flex flex-col gap-4 max-w-md mx-auto">
-      <h1 className="text-xl font-bold">Fan Controller</h1>
-      <BrokerAddress />
+    <div className="app">
+      <div className="card">
+        <h1 className="title">Fan Controller</h1>
+        <BrokerAddress />
+        <div className="button-row">
+          <button className="btn start" onClick={handleStart}>
+            Start
+          </button>
+          <button className="btn stop" onClick={handleStop}>
+            Stop
+          </button>
+        </div>
 
-      <div className="flex gap-2">
-        <button
-          className="bg-green-500 text-white px-4 py-2 rounded"
-          onClick={handleStart}
-        >
-          Start
-        </button>
-        <button
-          className="bg-red-500 text-white px-4 py-2 rounded"
-          onClick={handleStop}
-        >
-          Stop
-        </button>
-      </div>
+        <div className="slider-block">
+          <label className="slider-label">Speed</label>
+          <input
+            type="range"
+            min={800}
+            max={4000}
+            value={state.speed}
+            onChange={handleSpeedChange}
+            onPointerUp={handleSpeedSelect}
+          />
+          <div className="rpm">{state.speed} rpm</div>
+        </div>
 
-      <div>
-        <label className="block mb-2">Speed: {state.speedRpm}</label>
-        <input
-          type="range"
-          min={600}
-          max={4000}
-          value={state.speedRpm}
-          onChange={handleSpeedChange}
-          onPointerUp={handleSpeedSelect}
-          className="w-full"
-        />
-      </div>
-
-      <div className="font-medium">
-        Status: <span>{getStatusLabel()}</span>
+        <div className="status">
+          Status:{" "}
+          <span className={getStatusLabel().toLocaleLowerCase()}>
+            {getStatusLabel()}
+          </span>
+        </div>
       </div>
     </div>
   );
