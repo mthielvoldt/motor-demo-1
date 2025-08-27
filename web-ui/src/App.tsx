@@ -9,7 +9,7 @@ function App() {
     <>
       <div className='row-container'>
         <h1>ST Motor Control + Firment</h1>
-        <BrokerAddress />
+        <BrokerAddress showBrokerUrl={true} />
       </div>
       <div className="row-container">
         <div className='widget-column'>
