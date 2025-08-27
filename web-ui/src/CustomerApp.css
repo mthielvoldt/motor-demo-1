@@ -6,6 +6,8 @@
   min-height: 100vh;
   background: #f3f4f6;
   padding: 1rem;
+  color: #111827;
+  font-size: 1.5rem;
 }
 
 /* Card for content */
@@ -23,7 +25,7 @@
 
 .title {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
 }
 
@@ -36,11 +38,12 @@
 .btn {
   flex: 1;
   padding: 0.75rem;
-  font-size: 1rem;
+  /* font-weight: bold; */
   border: none;
   border-radius: 0.75rem;
   cursor: pointer;
   color: white;
+  transition: background 0.2s ease;
 }
 
 .btn.start {
@@ -73,13 +76,11 @@
 
 .rpm {
   margin-top: 0.5rem;
-  font-size: 1.1rem;
 }
 
 /* Status display */
 .status {
   text-align: center;
-  font-size: 1.1rem;
   font-weight: 500;
 }
 
@@ -91,4 +92,31 @@
 }
 .status .error {
   color: #dc2626;
+}
+
+/* ---------------------- */
+/* Dark mode overrides    */
+/* ---------------------- */
+@media (prefers-color-scheme: dark) {
+  .app {
+    background: #111827;
+    color: #f9fafb;
+  }
+
+  .card {
+    background: #1f2937; /* dark gray */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  }
+
+  .btn.start {
+    background: #22c55e; /* brighter green */
+  }
+
+  .btn.stop {
+    background: #ef4444; /* brighter red */
+  }
+
+  .status .stopped {
+    color: #9ca3af; /* lighter gray for visibility */
+  }
 }
