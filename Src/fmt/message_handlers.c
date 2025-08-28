@@ -10,6 +10,7 @@
 
 // Dependencies
 #include <fmt_comms.h>
+#include <fmt_version.h>
 #include <ghostProbe.h>
 
 #include <stdlib.h>
@@ -45,10 +46,10 @@ bool initFirmentComms(void)
 
 void handleTelemetry(void)
 {
-  static uint32_t count = 0, uptime = 0;
+  static uint32_t count = 0;
   switch (count++)
   {
-  case 0:
+  case 0:   // motor telemetry
   {
     fmt_sendMsg((Top){
         .which_sub = Top_MotorTlm_tag,
@@ -58,11 +59,10 @@ void handleTelemetry(void)
                 .speedRpm = ((int32_t)MCI_GetAvrgMecSpeedUnit(motor) * U_RPM) / SPEED_UNIT,
                 .currentMa = motor->pFOCVars->Iqd.q,
                 .busVoltageV = convert_BUS_VOLTAGE(&BusVoltageSensor->AvBusVoltage_d),
-                .uptime = uptime++,
             }}});
     break;
   }
-  case 100:
+  case 100: // motor faults
   {
     uint32_t faultsCombined = MCI_GetFaultState(motor);
     
@@ -101,9 +101,14 @@ void handleTelemetry(void)
     // });
     break;
   }
-  case 200:
+  case 200: // comms errors
   {
     reportCommsErrors();
+    break;
+  }
+  case 300: // version
+  {
+    fmt_sendVersion();
     break;
   }
   case 999:

@@ -33,7 +33,6 @@ message MotorTlm {
   sint32 speedRpm = 2;
   sint32 currentMa = 3;
   float busVoltageV = 4;
-  int32 uptime = 5;
 }
 
 message CurrentFaultTlm {
