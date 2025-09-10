@@ -68,9 +68,9 @@ message Top {
     RunScanCtl RunScanCtl = 5;
     ImageData ImageData = 6;
     PageStatus PageStatus = 7;
-    Version Version = 8;
-    Reset Reset = 9;
-    FirmentErrorTlm FirmentErrorTlm = 10;
+    FirmentErrorTlm FirmentErrorTlm = 8;
+    Version Version = 9;
+    Reset Reset = 10;
     MotorCtl MotorCtl = 16;
     MotorTlm MotorTlm = 17;
     PastFaultTlm PastFaultTlm = 18;

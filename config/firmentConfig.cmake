@@ -1,4 +1,6 @@
 
+set (PROJECT_STR "motor1")
+
 # The location of the firment directory
 set(FIRMENT_DIR "${PROJECT_SOURCE_DIR}/firment")
 set(APP_FW_CONFIG_DIR "${PROJECT_SOURCE_DIR}/Src/fmt/config")
